@@ -18,11 +18,13 @@ class FeatureDiscoveryManager extends ChangeNotifier {
     this._sharedPreferencesManager,
   );
 
+  /// Dismisses the feature for the given [featureId].
   void dismissFeatureDiscovery(FeatureId featureId) {
     _sharedPreferencesManager.dismissFeatureDiscovery(featureId);
     event.value = FeatureDiscoveryEvent(featureId: featureId);
   }
 
+  /// Returns true if the feature badge for the given [featureId] should be shown.
   bool showFeatureDiscoveryBadge(
     FeatureId featureId,
   ) {
@@ -31,6 +33,7 @@ class FeatureDiscoveryManager extends ChangeNotifier {
     return !(feature != null && _allSubFeaturesAreVisited(feature));
   }
 
+  /// Returns the feature with the given [id].
   Feature? _findFeature(Feature root, FeatureId id) {
     if (root.id == id) {
       return root;
@@ -46,6 +49,7 @@ class FeatureDiscoveryManager extends ChangeNotifier {
     return null;
   }
 
+  /// Returns true if all sub features of the given [feature] are visited.
   bool _allSubFeaturesAreVisited(Feature feature) {
     if (feature.children.isEmpty) {
       return _sharedPreferencesManager.featureAlreadyVisited(feature.id);

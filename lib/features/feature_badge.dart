@@ -6,6 +6,7 @@ import '../managers/feature_discovery_manager.dart';
 import 'feature_discovery_event.dart';
 import 'feature_id.dart';
 
+/// A widget that shows a badge if the feature discovery for the given [featureId] is not completed.
 class FeatureBadge extends StatefulWidget {
   final Widget child;
   final FeatureId featureId;

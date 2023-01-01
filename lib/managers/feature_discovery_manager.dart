@@ -26,18 +26,18 @@ class FeatureDiscoveryManager extends ChangeNotifier {
   bool showFeatureDiscoveryBadge(
     FeatureId featureId,
   ) {
-    final feature = _findFeatureRoot(features.first, featureId);
+    final feature = _findFeature(features, featureId);
 
     return !(feature != null && _allSubFeaturesAreVisited(feature));
   }
 
-  Feature? _findFeatureRoot(Feature root, FeatureId id) {
+  Feature? _findFeature(Feature root, FeatureId id) {
     if (root.id == id) {
       return root;
     }
 
     for (final child in root.children) {
-      final result = _findFeatureRoot(child, id);
+      final result = _findFeature(child, id);
       if (result != null) {
         return result;
       }
@@ -47,8 +47,8 @@ class FeatureDiscoveryManager extends ChangeNotifier {
   }
 
   bool _allSubFeaturesAreVisited(Feature feature) {
-    if (!_sharedPreferencesManager.getShowFeatureDiscovery(feature.id)) {
-      return false;
+    if (feature.children.isEmpty) {
+      return _sharedPreferencesManager.featureAlreadyVisited(feature.id);
     }
 
     return feature.children.every(_allSubFeaturesAreVisited);

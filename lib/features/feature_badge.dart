@@ -29,7 +29,7 @@ class _FeatureBadgeState extends State<FeatureBadge> {
         valueListenable: FeatureDiscoveryManager.event,
         builder: (context, event, _) => Badge(
           showBadge: featureDiscoveryManager.showFeatureDiscoveryBadge(
-            event.featureId,
+            widget.featureId,
           ),
           elevation: 0,
           badgeColor: const Color(0xFFF86868),

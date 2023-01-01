@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         home: Scaffold(
           body: SafeArea(
             child: ListView(
-              children: features.map(buildFeature).toList(),
+              children: [buildFeature(features)],
             ),
           ),
         ),

@@ -5,7 +5,7 @@ import '../features/feature_id.dart';
 
 @singleton
 class SharedPreferencesManager {
-  final String featureDiscoveryKey = 'showFeatureDiscovery4-';
+  final String featureDiscoveryKey = 'showFeatureDiscovery-';
 
   final SharedPreferences _sharedPreferences;
 
@@ -17,7 +17,7 @@ class SharedPreferencesManager {
         true,
       );
 
-  bool getShowFeatureDiscovery(FeatureId featureId) =>
+  bool featureAlreadyVisited(FeatureId featureId) =>
       _sharedPreferences.getBool('$featureDiscoveryKey${featureId.name}') ??
       false;
 }

@@ -27,7 +27,7 @@ class _FeatureBadgeState extends State<FeatureBadge> {
   @override
   Widget build(BuildContext context) =>
       ValueListenableBuilder<FeatureDiscoveryEvent>(
-        valueListenable: FeatureDiscoveryManager.event,
+        valueListenable: featureDiscoveryManager.event,
         builder: (context, event, _) => Badge(
           showBadge: featureDiscoveryManager.showFeatureDiscoveryBadge(
             widget.featureId,

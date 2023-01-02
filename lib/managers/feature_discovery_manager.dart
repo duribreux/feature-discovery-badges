@@ -10,9 +10,11 @@ import 'shared_preferences_manager.dart';
 @singleton
 class FeatureDiscoveryManager extends ChangeNotifier {
   final SharedPreferencesManager _sharedPreferencesManager;
-  static final ValueNotifier<FeatureDiscoveryEvent> event = ValueNotifier(
-    FeatureDiscoveryEvent(featureId: FeatureId.home),
+  final ValueNotifier<FeatureDiscoveryEvent> _event = ValueNotifier(
+    FeatureDiscoveryEvent(),
   );
+
+  ValueNotifier<FeatureDiscoveryEvent> get event => _event;
 
   FeatureDiscoveryManager(
     this._sharedPreferencesManager,
@@ -20,8 +22,8 @@ class FeatureDiscoveryManager extends ChangeNotifier {
 
   /// Dismisses the feature for the given [featureId].
   void dismissFeatureDiscovery(FeatureId featureId) {
-    _sharedPreferencesManager.dismissFeatureDiscovery(featureId);
-    event.value = FeatureDiscoveryEvent(featureId: featureId);
+    _sharedPreferencesManager.visiteFeature(featureId);
+    _event.value = FeatureDiscoveryEvent();
   }
 
   /// Returns true if the feature badge for the given [featureId] should be shown.
@@ -52,7 +54,7 @@ class FeatureDiscoveryManager extends ChangeNotifier {
   /// Returns true if all sub features of the given [feature] are visited.
   bool _allSubFeaturesAreVisited(Feature feature) {
     if (feature.children.isEmpty) {
-      return _sharedPreferencesManager.featureAlreadyVisited(feature.id);
+      return _sharedPreferencesManager.featureVisited(feature.id);
     }
 
     return feature.children.every(_allSubFeaturesAreVisited);

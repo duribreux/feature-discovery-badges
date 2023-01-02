@@ -12,14 +12,13 @@ class SharedPreferencesManager {
   SharedPreferencesManager(this._sharedPreferences);
 
   /// Dismisses the feature for the given [featureId].
-  Future<bool> dismissFeatureDiscovery(FeatureId featureId) =>
-      _sharedPreferences.setBool(
+  Future<bool> visiteFeature(FeatureId featureId) => _sharedPreferences.setBool(
         '$featureDiscoveryKey${featureId.name}',
         true,
       );
 
   /// Returns true if the feature badge for the given [featureId] should be shown.
-  bool featureAlreadyVisited(FeatureId featureId) =>
+  bool featureVisited(FeatureId featureId) =>
       _sharedPreferences.getBool('$featureDiscoveryKey${featureId.name}') ??
       false;
 }

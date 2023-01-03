@@ -20,6 +20,11 @@ class FeatureDiscoveryManager extends ChangeNotifier {
     this._sharedPreferencesManager,
   );
 
+  void clear() {
+    _sharedPreferencesManager.clear();
+    _event.value = FeatureDiscoveryEvent();
+  }
+
   /// Dismisses the feature for the given [featureId].
   void dismissFeatureDiscovery(FeatureId featureId) {
     _sharedPreferencesManager.visiteFeature(featureId);

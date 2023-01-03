@@ -21,4 +21,7 @@ class SharedPreferencesManager {
   bool featureVisited(FeatureId featureId) =>
       _sharedPreferences.getBool('$featureDiscoveryKey${featureId.name}') ??
       false;
+
+  /// Clears all data.
+  Future<void> clear() => _sharedPreferences.clear();
 }

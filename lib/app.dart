@@ -17,6 +17,15 @@ class App extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Feature Discovery Badges Demo'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.refresh),
+                onPressed: () => getIt.get<FeatureDiscoveryManager>().clear(),
+              ),
+            ],
+          ),
           body: SafeArea(
             child: ListView(
               children: [buildFeature(features)],
